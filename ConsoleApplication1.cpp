@@ -1,22 +1,14 @@
-﻿// ConsoleApplication1.cpp : Ten plik zawiera funkcję „main”. W nim rozpoczyna się i kończy wykonywanie programu.
+﻿﻿// ConsoleApplication1.cpp : Ten plik zawiera funkcję „main”. W nim rozpoczyna się i kończy wykonywanie programu.
 //
 
 #include <iostream>
 #include "Lista.h"
 #include "ListaSformatowana.h"
 using namespace std;
-int main()
-{
-	do {
-	  cout << "Wybierz opcje:\n";
-	  cout << "1. Test klasy List\n";
-	  cout << "2. Obliczenie sumy kontrolnej lancucha\n";
-	  cout << "0. Koniec\n";
-	  string txt;
-	  cin >> txt;
-	  if (txt.empty() || txt[0] == '0') break;
-	  switch (txt[0]) {
-	    case '1': {
+
+class Zadania {
+  public:
+    static void zadaniaZProgObiektowego() {
 		  cout << "wypisanie z klasy lista----------------------\n";
 		  //obiekt jako zmienna lokalna
 		  Lista li1(10);
@@ -35,13 +27,53 @@ int main()
 		  ListaSformatowana* lf = new ListaSformatowana(10);
 		  lf->wypisanie();
 		  delete lf;
-		  break;
+    };
+    static void zadaniaZeWskaznikow() {
+// wersja na klasie string:
+       constexpr auto WERSJA_SUMY_KONTROLNEJ = 's';
+    //stara wersja a la C: #define  WERSJA_SUMY_KONTROLNEJ 's'
+       cout << "Podaj napis: " << endl;
+       string lancuch;
+       cin >> lancuch;
+       unsigned char sigma = 100;
+       unsigned char licznik = 15;
+       
+       if (WERSJA_SUMY_KONTROLNEJ == 's') {       
+         for (unsigned char ch : lancuch) {
+           sigma ^= (ch + licznik);
+           licznik += 17;   
+         }
+       } else if (WERSJA_SUMY_KONTROLNEJ == 'w') {
+         // zadanie: napisać używając char *
+         const char *wsk = lancuch.c_str();
+         
+       }  
+
+       cout << "Suma kontrolna to: " << (int)sigma << endl;
+    };
+};
+
+int main()
+{
+	do {
+	  cout << "Wybierz opcje:\n";
+	  cout << "1. Test klasy List\n";
+	  cout << "2. Obliczenie sumy kontrolnej lancucha\n";
+	  cout << "0. Koniec\n";
+	  string txt;
+	  cin >> txt;
+	  if (txt.empty() || txt[0] == '0') break;
+	  switch (txt[0]) {
+	    case '1': {
+		    Zadania::zadaniaZProgObiektowego();
+        break;
 	    }
-		case '2': {
-			//TODO: opcja 2 do uzupełnienia
-		}
-		default:
-			break;
+		  case '2': {
+			  Zadania::zadaniaZeWskaznikow();
+        break;
+	  	}
+		  default:
+			  break;
 		}
 	  } while (true);
 }
