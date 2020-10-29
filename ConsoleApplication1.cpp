@@ -1,9 +1,6 @@
-﻿﻿// ConsoleApplication1.cpp : Ten plik zawiera funkcję „main”. W nim rozpoczyna się i kończy wykonywanie programu.
-//
-
-#include <iostream>
-#include "Lista.h"
+﻿#include "Lista.h"
 #include "ListaSformatowana.h"
+#include <iostream>
 using namespace std;
 
 class Zadania {
@@ -51,31 +48,45 @@ class Zadania {
 
        cout << "Suma kontrolna to: " << (int)sigma << endl;
     };
+	static void zadaniaZKlasAbstrakcyjnyjnych() {
+		//TODO:
+
+	}
 };
+/*
+  słowo virtual pozwala w C++ na tworzenie tak zwanych klas
+  abstrakcyjnych.
+*/
+
 
 int main()
 {
 	do {
-	  cout << "Wybierz opcje:\n";
-	  cout << "1. Test klasy List\n";
-	  cout << "2. Obliczenie sumy kontrolnej lancucha\n";
-	  cout << "0. Koniec\n";
-	  string txt;
-	  cin >> txt;
-	  if (txt.empty() || txt[0] == '0') break;
-	  switch (txt[0]) {
-	    case '1': {
-		    Zadania::zadaniaZProgObiektowego();
-        break;
-	    }
-		  case '2': {
-			  Zadania::zadaniaZeWskaznikow();
-        break;
-	  	}
-		  default:
-			  break;
+		cout << "Wybierz opcje:\n";
+		cout << "1. Test klasy List\n";
+		cout << "2. Obliczenie sumy kontrolnej lancucha\n";
+		cout << "3. Klasy abstrakcyjne\n";
+		cout << "0. Koniec\n";
+		string txt;
+		cin >> txt;
+		if (txt.empty() || txt[0] == '0') break;
+		switch (txt[0]) {
+		case '1': {
+			Zadania::zadaniaZProgObiektowego();
+			break;
 		}
-	  } while (true);
+		case '2': {
+			Zadania::zadaniaZeWskaznikow();
+			break;
+		}
+		case '3': {
+			Zadania::zadaniaZKlasAbstrakcyjnyjnych();
+			break;
+		}
+		default:
+			break;
+		}
+	} while (true);
 }
 
 // Uruchomienie programu: Ctrl + F5 lub menu Debugowanie > Uruchom bez debugowania

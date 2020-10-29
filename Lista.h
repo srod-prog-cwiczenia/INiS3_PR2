@@ -16,3 +16,4 @@ public:
 	virtual string format(string txt_p);
 };
 
+
