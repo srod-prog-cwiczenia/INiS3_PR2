@@ -64,7 +64,19 @@ class Zadania {
 		//nie ma więcej niż 1000 znaków):
 		char kopia[1000];
 		char* kopia2;
+		/* to jest sposób aby ,,rozwidlić'' kod programu na wesję kompilatora
+		dla Visual (_MSC_VER jest zdefiniowana) i 
+		wesję dla innych kompilatorów (gcc, clang) - wtedy
+		_MSC_VER jest niezdefiniowana. Można także zdefiniować zmienną VISUAL:
+#ifdef _MSC_VER
+  #define VISUAL
+#endif  */
+#ifdef _MSC_VER
+		auto ile = strlen(lancuch.c_str()) + 1;
+		memcpy_s(kopia, ile, lancuch.c_str(), ile);
+#else
 		memcpy(kopia, lancuch.c_str(), strlen(lancuch.c_str()) + 1);
+#endif
 		cout << "Kopia niskopoziomowa łańcucha: " << kopia;
     };
 	static void zadaniaZKlasAbstrakcyjnych() {
