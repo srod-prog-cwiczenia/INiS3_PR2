@@ -51,7 +51,21 @@ class Zadania {
 			sigma ^= (*wsk++ + licznik);
 			licznik += 17;
 		}
-		cout << "Suma kontrolna z użyciem niskopoziomoego char* to: " << (int)sigma << endl;
+		cout << "Suma kontrolna z użyciem niskopoziomowego char* to: " << (int)sigma << endl;
+
+//dodatkowe zadanie: 
+		/*
+		  Przy rzutowaniu obiektu lancuch do char* używamy jak wiadomo c_str().
+		  Nieodzowne jest zastosowanie const gdyż zawartości lancuch nie
+		  możemy zmieniać niskopoziomowo. 
+		  Zadanie: zrobić jego kopię.
+		*/
+		//pierwsze podejście (nieelastyczne, bo zakładamy że lancuch
+		//nie ma więcej niż 1000 znaków):
+		char kopia[1000];
+		char* kopia2;
+		memcpy(kopia, lancuch.c_str(), strlen(lancuch.c_str()) + 1);
+		cout << "Kopia niskopoziomowa łańcucha: " << kopia;
     };
 	static void zadaniaZKlasAbstrakcyjnych() {
 		//TODO:
