@@ -27,28 +27,33 @@ class Zadania {
     };
     static void zadaniaZeWskaznikow() {
 // wersja na klasie string:
-       constexpr auto WERSJA_SUMY_KONTROLNEJ = 's';
+		//zbędne stałe w tym kontekście ale niech pozostaną
+		constexpr auto WERSJA_SUMY_KONTROLNEJ = 'w';
     //stara wersja a la C: #define  WERSJA_SUMY_KONTROLNEJ 's'
-       cout << "Podaj napis: " << endl;
-       string lancuch;
-       cin >> lancuch;
-       unsigned char sigma = 100;
-       unsigned char licznik = 15;
+		cout << "Podaj napis: " << endl;
+		string lancuch;
+		cin >> lancuch;
+		unsigned char sigma = 100;
+		unsigned char licznik = 15;
        
-       if (WERSJA_SUMY_KONTROLNEJ == 's') {       
-         for (unsigned char ch : lancuch) {
-           sigma ^= (ch + licznik);
-           licznik += 17;   
-         }
-       } else if (WERSJA_SUMY_KONTROLNEJ == 'w') {
+		for (unsigned char ch : lancuch) {
+			sigma ^= (ch + licznik);
+			licznik += 17;   
+		}
+		cout << "Suma kontrolna wyliczona z użyciem klasy string to: " << (int)sigma << endl;
          // zadanie: napisać używając char *
-         const char *wsk = lancuch.c_str();
-         
-       }  
-
-       cout << "Suma kontrolna to: " << (int)sigma << endl;
+		sigma = 100;
+		licznik = 15;
+		const char *wsk = lancuch.c_str();
+		 //string powrot = (string)wsk; a tak się rzutuje vice versa 
+		 // z niskopoziomowego char* na string
+		while (*wsk) {
+			sigma ^= (*wsk++ + licznik);
+			licznik += 17;
+		}
+		cout << "Suma kontrolna z użyciem niskopoziomoego char* to: " << (int)sigma << endl;
     };
-	static void zadaniaZKlasAbstrakcyjnyjnych() {
+	static void zadaniaZKlasAbstrakcyjnych() {
 		//TODO:
 
 	}
@@ -80,7 +85,7 @@ int main()
 			break;
 		}
 		case '3': {
-			Zadania::zadaniaZKlasAbstrakcyjnyjnych();
+			Zadania::zadaniaZKlasAbstrakcyjnych();
 			break;
 		}
 		default:
