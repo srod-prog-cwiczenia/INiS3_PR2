@@ -1,9 +1,5 @@
 #pragma once
-#define WER_Z_KLAWIATURY 'w'
-#define WER_DNI_TYGODNIA 't'
-#include <vector>
-#include <string>
-using namespace std;
+#include "define.h"
 class Lista
 {
 private:

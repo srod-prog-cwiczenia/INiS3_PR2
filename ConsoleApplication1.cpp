@@ -1,7 +1,5 @@
 ﻿#include "Lista.h"
 #include "ListaSformatowana.h"
-#include <iostream>
-using namespace std;
 
 class Zadania {
   public:
@@ -71,7 +69,7 @@ class Zadania {
 #ifdef _MSC_VER
   #define VISUAL
 #endif  */
-#ifdef _MSC_VER
+#ifdef VISUAL
 		auto ile = strlen(lancuch.c_str()) + 1;
 		memcpy_s(kopia, ile, lancuch.c_str(), ile);
 #else

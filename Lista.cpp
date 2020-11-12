@@ -1,5 +1,4 @@
 #include "Lista.h"
-#include <iostream>
 Lista::Lista(int ile) {
 
 	for (int i = 0; i < ile; i++)
