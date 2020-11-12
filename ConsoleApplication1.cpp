@@ -1,5 +1,6 @@
 ﻿#include "Lista.h"
 #include "ListaSformatowana.h"
+#include "TMenu.h"
 
 class Zadania {
   public:
@@ -128,32 +129,30 @@ class Zadania {
 
 int main()
 {
+	bool koniec = false;
 	do {
-		cout << "Wybierz opcje:\n";
-		cout << "1. Test klasy List\n";
-		cout << "2. Obliczenie sumy kontrolnej lancucha\n";
-		cout << "3. Klasy abstrakcyjne\n";
-		cout << "0. Koniec\n";
-		string txt;
-		cin >> txt;
-		if (txt.empty() || txt[0] == '0') break;
-		switch (txt[0]) {
-		case '1': {
+		TMenu mnu;
+		mnu.addAll(3, "Test klasy List",
+			"Obliczenie sumy kontrolnej lancucha",
+			"Klasy abstrakcyjne");
+		switch (mnu.wybierz()) {
+		case 1: {
 			Zadania::zadaniaZProgObiektowego();
 			break;
 		}
-		case '2': {
+		case 2: {
 			Zadania::zadaniaZeWskaznikow();
 			break;
 		}
-		case '3': {
+		case 3: {
 			Zadania::zadaniaZKlasAbstrakcyjnych();
 			break;
 		}
 		default:
+			koniec = true;
 			break;
 		}
-	} while (true);
+	} while (!koniec);
 }
 
 // Uruchomienie programu: Ctrl + F5 lub menu Debugowanie > Uruchom bez debugowania
