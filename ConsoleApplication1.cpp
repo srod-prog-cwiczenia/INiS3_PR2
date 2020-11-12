@@ -94,8 +94,30 @@ class Zadania {
 		free(kopia2);
     };
 	static void zadaniaZKlasAbstrakcyjnych() {
-		//TODO:
-
+		/*
+		  w C++ rolę interfejsów pełnią tak zwane klasy 
+		  abstrakcyjne. Klasa abstrakcyjna to klasa która
+		  nie posiada instancji, czyli nie można utworzyć
+		  obiektu o typie tej klasy.
+		*/
+		/*zadanie: utworzyć klasę Menu do obsługi menu.
+		interface tej klasy wyglądać może tak: */
+		class TMenuAbs {  //to jest klasa abstrakcyjna (bo zawiera 
+	//konstrukcje postaci: virtual ... = 0;
+		public:
+			virtual void addAll(int ilePar, ...) = 0;
+			virtual unsigned int wybierz() = 0;
+			TMenuAbs() {};
+			virtual ~TMenuAbs() {};
+			/*
+			  implementacja tego interfejsu powinna funkcjonować tak:
+				TMenu* mnu = new TMenu();
+				mnu->addAll(2, "Opcja 1", "Opcja 2");
+				  (automatyczna numeracja + 0. Wyjscie).
+				auto opcja = mnu->wybierz();
+				delete mnu;
+			*/
+		};
 	}
 };
 /*
