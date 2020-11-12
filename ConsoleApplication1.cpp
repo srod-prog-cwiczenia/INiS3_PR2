@@ -69,13 +69,29 @@ class Zadania {
 #ifdef _MSC_VER
   #define VISUAL
 #endif  */
-#ifdef VISUAL
 		auto ile = strlen(lancuch.c_str()) + 1;
+#ifdef VISUAL
 		memcpy_s(kopia, ile, lancuch.c_str(), ile);
 #else
 		memcpy(kopia, lancuch.c_str(), strlen(lancuch.c_str()) + 1);
 #endif
-		cout << "Kopia niskopoziomowa łańcucha: " << kopia;
+		cout << "Kopia niskopoziomowa łańcucha: " << kopia << endl;
+
+		/*zadanie; zaalokować pamięć do zmiennej kopia2 przez
+		  instrukcję malloc. Zwróćmy uwagę że malloc
+		  tworzy tak zwany ,,wskaźnik generyczny'', czyli 
+		  taki ,,uniwersalny wskaźnik'', void *,
+		  więc aby postawić go pod typowany wskaźnik kopia2
+		  należy użyć rzutowania (char*)
+		  */
+		kopia2 = (char*) malloc(strlen(lancuch.c_str()) + 1);
+#ifdef VISUAL
+		memcpy_s(kopia2, ile, lancuch.c_str(), ile);
+#else
+		memcpy(kopia2, lancuch.c_str(), strlen(lancuch.c_str()) + 1);
+#endif
+		cout << "Kopia niskopoziomowa łańcucha: " << kopia2 << endl;
+		free(kopia2);
     };
 	static void zadaniaZKlasAbstrakcyjnych() {
 		//TODO:
