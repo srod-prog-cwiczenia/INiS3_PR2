@@ -4,7 +4,11 @@
 
 class Zadania {
   public:
-    static void zadaniaZProgObiektowego() {
+	  struct DaneOsoby { //klasa (tak naprawdę struktura) wewnętrzna klasy Zadania.
+		  string imie, nazwisko;
+		  unsigned int wiek;
+	  };
+	  static void zadaniaZProgObiektowego() {
 		  cout << "wypisanie z klasy lista----------------------\n";
 		  //obiekt jako zmienna lokalna
 		  Lista li1(10);
@@ -119,6 +123,20 @@ class Zadania {
 				delete mnu;
 			*/
 		};
+	}
+
+	static void zadanieZPrzeladowywaniaOperatorow() {
+		/*
+		1. należy zdefiniować strukturę DaneOsoby zawierajacą:
+		string imie, nazwisko;
+		unsigned int wiek;
+		2. należy przedefiniować (=przeciążyć = przeładować)
+		jak najwięcej operatorów, np.
+		< > <= >= == != + += ! itd.itd
+		UWAGA: Aby można było przeciążyć operatory na przypadek
+		tej struktury trzeba ją zdefiniować nie w tym miejscu
+		ale np. jako klasę wewnętrzną klasy Zadania.
+		*/
 	}
 };
 /*
