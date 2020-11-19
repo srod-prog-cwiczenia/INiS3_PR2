@@ -9,6 +9,7 @@ class Zadania {
 		  unsigned int wiek;
 		  DaneOsoby(string imie_p, string nazwisko_p, unsigned int wiek_p) :
 			  imie(imie_p), nazwisko(nazwisko_p), wiek(wiek_p) {};
+		  operator string() { return imie + " " + nazwisko + " " + to_string(wiek); };
 	  };
 	  static void zadaniaZProgObiektowego() {
 		  cout << "wypisanie z klasy lista----------------------\n";
@@ -137,11 +138,17 @@ class Zadania {
 		2. należy przedefiniować (=przeciążyć = przeładować)
 		jak najwięcej operatorów, np.
 		< > <= >= == != + += ! itd.itd
+		a także operator rzutowania (string)
 		UWAGA: Aby można było przeciążyć operatory na przypadek
 		tej struktury trzeba ją zdefiniować nie w tym miejscu
 		ale np. jako klasę wewnętrzną klasy Zadania.
 		*/
-		cout << "TODO: w trakcie tworzenia..." << endl;
+		DaneOsoby oso1("Adam", "Kowalski", 25);
+		DaneOsoby oso2 = {"Anna", "Kowalska", 22};
+		DaneOsoby oso3 = oso1;
+		oso3.wiek = 30;//to nie zmienia zawartości oso1
+		DaneOsoby tabOsob[2] = { {"Dorota", "Nowak", 20}, {"Andrzej", "Nowak", 40} };
+		cout << ":Osoba 1: " << (string)oso1 << endl;
 	}
 };
 /*
