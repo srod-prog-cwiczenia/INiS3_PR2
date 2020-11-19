@@ -8,9 +8,20 @@ class Zadania {
 		  unsigned int wiek;
 		  DaneOsoby(string imie_p, string nazwisko_p, unsigned int wiek_p) :
 			  imie(imie_p), nazwisko(nazwisko_p), wiek(wiek_p) {};
+		  //przeładowanie operatorów rzutowania:
 		  operator string() { return imie + " " + nazwisko + " " + to_string(wiek); };
+		  operator int() { return wiek; };
 		  bool operator !() { return imie.empty() && nazwisko.empty() && !wiek; };
 		  /*!wiek to skrót na (wiek == 0)*/
+		  //przeładowanie operatorów porównania:
+		  bool operator == (const DaneOsoby& a) {
+			  return imie == a.imie && nazwisko == a.nazwisko && wiek == a.wiek;
+		  };
+		  bool operator != (const DaneOsoby& a) {
+			  !(*this == a);
+		  };
+
+
 	  };
 	  static void zadaniaZProgObiektowego() {
 		  cout << "wypisanie z klasy lista----------------------\n";
@@ -156,6 +167,7 @@ class Zadania {
 		assert(!!oso1); //...gdzie pierwszy wykrzyknik oznacza negację boolowską,
 		// drugi wykrzynik to oczywiście przeładowanie operatora ! na strukturę DaneOso
 		assert(!DaneOsoby( "", "", 0 ));
+		//TODO: napisać testy jednostkowe dla == i != i (int)
 		cout << "Testy przeszły poprawnie\n";
 	}
 };
