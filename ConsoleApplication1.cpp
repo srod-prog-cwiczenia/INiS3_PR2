@@ -1,7 +1,6 @@
 ﻿#include "Lista.h"
 #include "ListaSformatowana.h"
 #include "TMenu.h"
-
 class Zadania {
   public:
 	  struct DaneOsoby { //klasa (tak naprawdę struktura) wewnętrzna klasy Zadania.
@@ -10,6 +9,8 @@ class Zadania {
 		  DaneOsoby(string imie_p, string nazwisko_p, unsigned int wiek_p) :
 			  imie(imie_p), nazwisko(nazwisko_p), wiek(wiek_p) {};
 		  operator string() { return imie + " " + nazwisko + " " + to_string(wiek); };
+		  bool operator !() { return imie.empty() && nazwisko.empty() && !wiek; };
+		  /*!wiek to skrót na (wiek == 0)*/
 	  };
 	  static void zadaniaZProgObiektowego() {
 		  cout << "wypisanie z klasy lista----------------------\n";
@@ -148,7 +149,14 @@ class Zadania {
 		DaneOsoby oso3 = oso1;
 		oso3.wiek = 30;//to nie zmienia zawartości oso1
 		DaneOsoby tabOsob[2] = { {"Dorota", "Nowak", 20}, {"Andrzej", "Nowak", 40} };
+		// test dla operatora (string):
 		cout << ":Osoba 1: " << (string)oso1 << endl;
+		//test dla operatora ! :
+		assert(!oso1 == false); //albo już zupełnie skrótowo:
+		assert(!!oso1); //...gdzie pierwszy wykrzyknik oznacza negację boolowską,
+		// drugi wykrzynik to oczywiście przeładowanie operatora ! na strukturę DaneOso
+		assert(!DaneOsoby( "", "", 0 ));
+		cout << "Testy przeszły poprawnie\n";
 	}
 };
 /*
