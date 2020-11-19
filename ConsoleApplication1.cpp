@@ -7,6 +7,8 @@ class Zadania {
 	  struct DaneOsoby { //klasa (tak naprawdę struktura) wewnętrzna klasy Zadania.
 		  string imie, nazwisko;
 		  unsigned int wiek;
+		  DaneOsoby(string imie_p, string nazwisko_p, unsigned int wiek_p) :
+			  imie(imie_p), nazwisko(nazwisko_p), wiek(wiek_p) {};
 	  };
 	  static void zadaniaZProgObiektowego() {
 		  cout << "wypisanie z klasy lista----------------------\n";
@@ -123,6 +125,8 @@ class Zadania {
 				delete mnu;
 			*/
 		};
+		cout << "Zadanie wykonane - klasa abstrakcyjna TMenuAbs zaimplementowana\n"
+			"w module TMenu\n";
 	}
 
 	static void zadanieZPrzeladowywaniaOperatorow() {
@@ -137,6 +141,7 @@ class Zadania {
 		tej struktury trzeba ją zdefiniować nie w tym miejscu
 		ale np. jako klasę wewnętrzną klasy Zadania.
 		*/
+		cout << "TODO: w trakcie tworzenia..." << endl;
 	}
 };
 /*
@@ -144,15 +149,14 @@ class Zadania {
   abstrakcyjnych.
 */
 
-
 int main()
 {
 	bool koniec = false;
 	do {
 		TMenu mnu;
-		mnu.addAll(3, "Test klasy List",
+		mnu.addAll(4, "Test klasy List",
 			"Obliczenie sumy kontrolnej lancucha",
-			"Klasy abstrakcyjne");
+			"Klasy abstrakcyjne", "Zadanie z przeładowywania operatorów");
 		switch (mnu.wybierz()) {
 		case 1: {
 			Zadania::zadaniaZProgObiektowego();
@@ -164,6 +168,10 @@ int main()
 		}
 		case 3: {
 			Zadania::zadaniaZKlasAbstrakcyjnych();
+			break;
+		}
+		case 4: {
+			Zadania::zadanieZPrzeladowywaniaOperatorow();
 			break;
 		}
 		default:
