@@ -9,9 +9,9 @@ class Zadania {
 		  DaneOsoby(string imie_p, string nazwisko_p, unsigned int wiek_p) :
 			  imie(imie_p), nazwisko(nazwisko_p), wiek(wiek_p) {};
 		  //przeładowanie operatorów rzutowania:
-		  operator string() { return imie + " " + nazwisko + " " + to_string(wiek); };
-		  operator int() { return wiek; };
-		  bool operator !() { return imie.empty() && nazwisko.empty() && !wiek; };
+		  operator string() const { return imie + " " + nazwisko + " " + to_string(wiek); };
+		  operator int() const { return wiek; };
+		  bool operator !() const { return imie.empty() && nazwisko.empty() && !wiek; };
 		  /*!wiek to skrót na (wiek == 0)*/
 		  //przeładowanie operatorów porównania:
 		  bool operator == (const DaneOsoby& a) {
@@ -20,8 +20,14 @@ class Zadania {
 		  bool operator != (const DaneOsoby& a) {
 			  return !(*this == a);
 		  };
-
-
+		  bool operator < (const DaneOsoby& a) {
+			  if (nazwisko < a.nazwisko) return true;
+			  if (nazwisko > a.nazwisko) return false;
+			  if (imie < a.imie) return true;
+			  if (imie > a.imie) return false;
+			  if (wiek < a.wiek) return true;
+			  return false;
+		  }
 	  };
 	  static void zadaniaZProgObiektowego() {
 		  cout << "wypisanie z klasy lista----------------------\n";
@@ -159,7 +165,6 @@ class Zadania {
 		DaneOsoby oso2 = {"Anna", "Kowalska", 22};
 		DaneOsoby oso3 = oso1;
 		oso3.wiek = 30;//to nie zmienia zawartości oso1
-		DaneOsoby tabOsob[2] = { {"Dorota", "Nowak", 20}, {"Andrzej", "Nowak", 40} };
 		// test dla operatora (string):
 		cout << ":Osoba 1: " << (string)oso1 << endl;
 		//test dla operatora ! :
@@ -171,14 +176,31 @@ class Zadania {
 		assert(oso1 != oso2);
 		assert(oso1 == DaneOsoby("Adam", "Kowalski", 25));
 		assert((int)oso1 == 25);
-
+		// testy jednostkowe dla < :
+		assert(oso2 < oso1);
 		cout << "Testy przeszły poprawnie\n";
 	}
 	static void przeladowaniePorownaniaASTL() {
 		/* zadanie: utworzyć kolekcję set<DaneOsoby>, dodać
 		kilka osób do niej (w tym spróbować dodac zdublowaną) a potem
 		je wypisać*/
-		cout << "TODO: rozwiazac zadanie!";
+		DaneOsoby tabOsob[] = { {"Dorota", "Nowak", 20},
+		{"Andrzej", "Nowak", 40},
+		{"Adam", "Kowalski", 25},
+		{"Anna", "Kowalska", 22} };
+		/*lecz aby używać do struktury kolekcje set i map 
+		nieodzowne jest przeładowanie w strukturze operatora < bo
+		STL musi mieć komparator który albo możemy podać mu jawnie
+		bodajże w konstruktorze albo po prostu przeładowac < w strukturze */
+		set<DaneOsoby> zOso;
+		zOso.insert(DaneOsoby("Adam", "Kowalski", 25));
+		for (auto oso : tabOsob) {
+			zOso.insert(oso);
+			oso.nazwisko = "blablabla";//sprawdzamy czy ,,uszkodzimy'' zawartość tabOsob
+		}
+		for (const auto& oso : tabOsob) {
+			cout << (string)oso << endl;
+		}
 	}
 };
 /*
