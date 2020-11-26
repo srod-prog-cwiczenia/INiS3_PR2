@@ -142,7 +142,7 @@ class Zadania {
 			"w module TMenu\n";
 	}
 
-	static void zadanieZPrzeladowywaniaOperatorow() {
+	static void testyJednostkoweZPrzeladowywaniaOperatorow() {
 		/*
 		1. należy zdefiniować strukturę DaneOsoby zawierajacą:
 		string imie, nazwisko;
@@ -173,6 +173,12 @@ class Zadania {
 		assert((int)oso1 == 25);
 
 		cout << "Testy przeszły poprawnie\n";
+	}
+	static void przeladowaniePorownaniaASTL() {
+		/* zadanie: utworzyć kolekcję set<DaneOsoby>, dodać
+		kilka osób do niej (w tym spróbować dodac zdublowaną) a potem
+		je wypisać*/
+		cout << "TODO: rozwiazac zadanie!";
 	}
 };
 /*
@@ -209,10 +215,10 @@ int main()
 					"Zastosowanie przeladowania < do set<DaneOsoby>");
 				switch (mnu2.wybierz()) {
 				case 1:
-					Zadania::zadanieZPrzeladowywaniaOperatorow();
+					Zadania::testyJednostkoweZPrzeladowywaniaOperatorow();
 					break;
 				case 2:
-					cout << "TODO";
+					Zadania::przeladowaniePorownaniaASTL();
 					break;
 				default:
 					koniec2 = true;
