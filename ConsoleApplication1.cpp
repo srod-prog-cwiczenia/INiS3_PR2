@@ -182,13 +182,13 @@ class Zadania {
 
 int main()
 {
-	bool koniec = false;
+	bool koniec1 = false;
 	do {
-		TMenu mnu;
-		mnu.addAll(4, "Test klasy List",
+		TMenu mnu1;
+		mnu1.addAll(4, "Test klasy List",
 			"Obliczenie sumy kontrolnej lancucha",
-			"Klasy abstrakcyjne", "Zadanie z przeładowywania operatorów");
-		switch (mnu.wybierz()) {
+			"Klasy abstrakcyjne", "Zadania z przeładowywania operatorów");
+		switch (mnu1.wybierz()) {
 		case 1: {
 			Zadania::zadaniaZProgObiektowego();
 			break;
@@ -202,14 +202,30 @@ int main()
 			break;
 		}
 		case 4: {
-			Zadania::zadanieZPrzeladowywaniaOperatorow();
+			bool koniec2 = false;
+			do {
+				TMenu mnu2;
+				mnu2.addAll(2, "Testy przeladowania operatorow",
+					"Zastosowanie przeladowania < do set<DaneOsoby>");
+				switch (mnu2.wybierz()) {
+				case 1:
+					Zadania::zadanieZPrzeladowywaniaOperatorow();
+					break;
+				case 2:
+					cout << "TODO";
+					break;
+				default:
+					koniec2 = true;
+					break;
+				}
+			} while (!koniec2);
 			break;
 		}
 		default:
-			koniec = true;
+			koniec1 = true;
 			break;
 		}
-	} while (!koniec);
+	} while (!koniec1);
 }
 
 // Uruchomienie programu: Ctrl + F5 lub menu Debugowanie > Uruchom bez debugowania
