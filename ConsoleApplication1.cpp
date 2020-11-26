@@ -20,6 +20,10 @@ class Zadania {
 		  bool operator != (const DaneOsoby& a) {
 			  return !(*this == a);
 		  };
+		  /*pierwszy sposób na przeładowanie < może być
+		  * używany przy porównaniach postaci oso1 < oso2, ale
+		  * nie funkcjonuje w kolekcjach
+		  */
 		  bool operator < (const DaneOsoby& a) {
 			  if (nazwisko < a.nazwisko) return true;
 			  if (nazwisko > a.nazwisko) return false;
@@ -28,6 +32,18 @@ class Zadania {
 			  if (wiek < a.wiek) return true;
 			  return false;
 		  }
+		  /*
+		  drugi sposób na przeładowanie <, funkcjonuje w kolekcjach,
+		  może być używany też zamiast powyższego (czyli go zastępuje)
+		  */
+		  friend bool operator < (const DaneOsoby& a, const DaneOsoby& b) {
+			  if (a.nazwisko < b.nazwisko) return true;
+			  if (a.nazwisko > b.nazwisko) return false;
+			  if (a.imie < b.imie) return true;
+			  if (a.imie > b.imie) return false;
+			  if (a.wiek < b.wiek) return true;
+			  return false;
+		  };
 	  };
 	  static void zadaniaZProgObiektowego() {
 		  cout << "wypisanie z klasy lista----------------------\n";
@@ -194,13 +210,19 @@ class Zadania {
 		bodajże w konstruktorze albo po prostu przeładowac < w strukturze */
 		set<DaneOsoby> zOso;
 		zOso.insert(DaneOsoby("Adam", "Kowalski", 25));
-		for (auto oso : tabOsob) {
-			zOso.insert(oso);
-			oso.nazwisko = "blablabla";//sprawdzamy czy ,,uszkodzimy'' zawartość tabOsob
-		}
 		for (const auto& oso : tabOsob) {
-			cout << (string)oso << endl;
+			zOso.insert(oso);
 		}
+		cout << "Zawartosc zbioru zOso to (petla): \n";
+		for (const auto& oso : zOso) {
+			cout << (string)oso << endl;
+			/* ....ale zawartosc zOso okazala się być nieposortowana....*/
+		}
+		/*wypisywanie przy użyciu iteratora: */
+		cout << string(50, '=') << endl;
+		cout << "Zawartosc zbioru zOso to (iterator): \n";
+		for (auto ite = zOso.begin(); ite != zOso.end(); ite++)
+			cout << (string)(*ite) << endl;
 	}
 };
 /*
