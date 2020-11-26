@@ -216,13 +216,30 @@ class Zadania {
 		cout << "Zawartosc zbioru zOso to (petla): \n";
 		for (const auto& oso : zOso) {
 			cout << (string)oso << endl;
-			/* ....ale zawartosc zOso okazala się być nieposortowana....*/
+			/* ....ale zawartosc zOso okazala się być nieposortowana....
+			bo nieodzowne jest użycie przeładowania friend...*/
 		}
 		/*wypisywanie przy użyciu iteratora: */
 		cout << string(50, '=') << endl;
 		cout << "Zawartosc zbioru zOso to (iterator): \n";
 		for (auto ite = zOso.begin(); ite != zOso.end(); ite++)
 			cout << (string)(*ite) << endl;
+		/*UWAGA: taka sama koniecznosc przeladowania operatora porownania <
+		* dla struktury DaneOsoby zachodzi w przypadku kiedy 
+		* używamy std::map - map<DaneOsoby, double>
+		* Przykład:
+		*/
+		map<DaneOsoby, double> mOsoKw; //Kw - kwota
+		double kwota = 0.0;
+		for (const auto& oso : tabOsob) {
+			mOsoKw[oso] = (kwota += 1000.0);
+		}
+		cout << "\nWypisanie zawartosci mapy mOsoKw: \n";
+		for (const auto& ele : mOsoKw) {
+			cout << (string)ele.first << " -> " << ele.second << endl;
+		}
+
+
 	}
 };
 /*
