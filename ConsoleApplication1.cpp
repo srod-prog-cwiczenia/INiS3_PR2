@@ -18,7 +18,7 @@ class Zadania {
 			  return imie == a.imie && nazwisko == a.nazwisko && wiek == a.wiek;
 		  };
 		  bool operator != (const DaneOsoby& a) {
-			  !(*this == a);
+			  return !(*this == a);
 		  };
 
 
@@ -167,7 +167,11 @@ class Zadania {
 		assert(!!oso1); //...gdzie pierwszy wykrzyknik oznacza negację boolowską,
 		// drugi wykrzynik to oczywiście przeładowanie operatora ! na strukturę DaneOso
 		assert(!DaneOsoby( "", "", 0 ));
-		//TODO: napisać testy jednostkowe dla == i != i (int)
+		//testy jednostkowe dla == i != i (int)
+		assert(oso1 != oso2);
+		assert(oso1 == DaneOsoby("Adam", "Kowalski", 25));
+		assert((int)oso1 == 25);
+
 		cout << "Testy przeszły poprawnie\n";
 	}
 };
