@@ -271,6 +271,9 @@ class Zadania {
 		modułu*/
 		TTriple<int> trzyInt(10, 11, 12); //to jest ,,konkretyzacja'' naszego szablonu
 		cout << "Tu powinno być 12: " << trzyInt.getZ() << endl;
+		TTriple<string> trzyS = {"Ala", "ma", "kota"}; //to jest konkretyzacja szablonu na typ string
+		cout << "Tu powinien być tekst z konstruktora obiektu trzyS: "
+			<< trzyS.getX() << " " << trzyS.getY() << " " << trzyS.getZ() << endl;
 	}
 };
 /*
