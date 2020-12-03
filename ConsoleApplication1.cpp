@@ -196,50 +196,59 @@ class Zadania {
 		assert(oso2 < oso1);
 		cout << "Testy przeszły poprawnie\n";
 	}
-	static void przeladowaniePorownaniaASTL() {
-		/* zadanie: utworzyć kolekcję set<DaneOsoby>, dodać
-		kilka osób do niej (w tym spróbować dodac zdublowaną) a potem
-		je wypisać*/
+	static void przeladowaniePorownaniaASTL(const char& wersjaP = 's') { //tu parametr domyślny
+		/*wersjaP == 'm' test map
+		  wersjaP == 's' test set*/
+		  /* zadanie: utworzyć kolekcję set<DaneOsoby>, dodać
+		  kilka osób do niej (w tym spróbować dodac zdublowaną) a potem
+		  je wypisać*/
 		DaneOsoby tabOsob[] = { {"Dorota", "Nowak", 20},
 		{"Andrzej", "Nowak", 40},
 		{"Adam", "Kowalski", 25},
+		{"Adam", "Kowalski", 25},
 		{"Anna", "Kowalska", 22} };
-		/*lecz aby używać do struktury kolekcje set i map 
-		nieodzowne jest przeładowanie w strukturze operatora < bo
-		STL musi mieć komparator który albo możemy podać mu jawnie
-		bodajże w konstruktorze albo po prostu przeładowac < w strukturze */
-		set<DaneOsoby> zOso;
-		zOso.insert(DaneOsoby("Adam", "Kowalski", 25));
-		for (const auto& oso : tabOsob) {
-			zOso.insert(oso);
+		switch (wersjaP) {
+		case 's': case 'S': {
+			/*lecz aby używać do struktury kolekcje set i map
+			nieodzowne jest przeładowanie w strukturze operatora < bo
+			STL musi mieć komparator który albo możemy podać mu jawnie
+			bodajże w konstruktorze albo po prostu przeładowac < w strukturze */
+			set<DaneOsoby> zOso;
+			zOso.insert(DaneOsoby("Adam", "Kowalski", 25));
+			for (const auto& oso : tabOsob) {
+				zOso.insert(oso);
+			}
+			cout << "Zawartosc zbioru zOso to (petla): \n";
+			for (const auto& oso : zOso) {
+				cout << (string)oso << endl;
+				/* ....ale zawartosc zOso okazala się być nieposortowana....
+				bo nieodzowne jest użycie przeładowania friend...*/
+			}
+			/*wypisywanie przy użyciu iteratora: */
+			cout << string(50, '=') << endl;
+			cout << "Zawartosc zbioru zOso to (iterator): \n";
+			for (auto ite = zOso.begin(); ite != zOso.end(); ite++)
+				cout << (string)(*ite) << endl;
+			break;
 		}
-		cout << "Zawartosc zbioru zOso to (petla): \n";
-		for (const auto& oso : zOso) {
-			cout << (string)oso << endl;
-			/* ....ale zawartosc zOso okazala się być nieposortowana....
-			bo nieodzowne jest użycie przeładowania friend...*/
+		case 'm': {
+			/*UWAGA: taka sama koniecznosc przeladowania operatora porownania <
+	* dla struktury DaneOsoby zachodzi w przypadku kiedy
+	* używamy std::map - map<DaneOsoby, double>
+	* Przykład:
+	*/
+			map<DaneOsoby, double> mOsoKw; //Kw - kwota
+			double kwota = 0.0;
+			for (const auto& oso : tabOsob) {
+				mOsoKw[oso] = (kwota += 1000.0);
+			}
+			cout << "\nWypisanie zawartosci mapy mOsoKw: \n";
+			for (const auto& ele : mOsoKw) {
+				cout << (string)ele.first << " -> " << ele.second << endl;
+			}
+			break;
 		}
-		/*wypisywanie przy użyciu iteratora: */
-		cout << string(50, '=') << endl;
-		cout << "Zawartosc zbioru zOso to (iterator): \n";
-		for (auto ite = zOso.begin(); ite != zOso.end(); ite++)
-			cout << (string)(*ite) << endl;
-		/*UWAGA: taka sama koniecznosc przeladowania operatora porownania <
-		* dla struktury DaneOsoby zachodzi w przypadku kiedy 
-		* używamy std::map - map<DaneOsoby, double>
-		* Przykład:
-		*/
-		map<DaneOsoby, double> mOsoKw; //Kw - kwota
-		double kwota = 0.0;
-		for (const auto& oso : tabOsob) {
-			mOsoKw[oso] = (kwota += 1000.0);
 		}
-		cout << "\nWypisanie zawartosci mapy mOsoKw: \n";
-		for (const auto& ele : mOsoKw) {
-			cout << (string)ele.first << " -> " << ele.second << endl;
-		}
-
-
 	}
 };
 /*
@@ -272,14 +281,18 @@ int main()
 			bool koniec2 = false;
 			do {
 				TMenu mnu2;
-				mnu2.addAll(2, "Testy przeladowania operatorow",
-					"Zastosowanie przeladowania < do set<DaneOsoby>");
+				mnu2.addAll(3, "Testy przeladowania operatorow",
+					"Zastosowanie przeladowania < do set<DaneOsoby>",
+					"Zastosowanie przeladowania < do map<DaneOsoby, double>");
 				switch (mnu2.wybierz()) {
 				case 1:
 					Zadania::testyJednostkoweZPrzeladowywaniaOperatorow();
 					break;
 				case 2:
-					Zadania::przeladowaniePorownaniaASTL();
+					Zadania::przeladowaniePorownaniaASTL('s');
+					break;
+				case 3:
+					Zadania::przeladowaniePorownaniaASTL('m');
 					break;
 				default:
 					koniec2 = true;
