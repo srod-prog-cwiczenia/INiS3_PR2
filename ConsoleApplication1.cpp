@@ -1,6 +1,22 @@
 ﻿#include "Lista.h"
 #include "ListaSformatowana.h"
 #include "TMenu.h"
+/*TODO:
+trzeba uzupełnić (niestety, już samodzielnie ;) ):
+typy (wskaźniki) funkcyjne;
+funktory;
+szablony*/
+template <typename T>
+class TTriple {
+private:
+	T x, y, z;
+public:
+	TTriple(const T& xp, const T& yp, const T& zp) :
+		x(xp), y(yp), z(zp) {}
+	T getX() { return x; }
+	T getY() { return y; }
+	T getZ() { return z; }
+};
 class Zadania {
   public:
 	  struct DaneOsoby { //klasa (tak naprawdę struktura) wewnętrzna klasy Zadania.
@@ -231,7 +247,7 @@ class Zadania {
 				cout << (string)(*ite) << endl;
 			break;
 		}
-		case 'm': {
+		case 'm': case 'M': {
 			/*UWAGA: taka sama koniecznosc przeladowania operatora porownania <
 	* dla struktury DaneOsoby zachodzi w przypadku kiedy
 	* używamy std::map - map<DaneOsoby, double>
@@ -250,6 +266,12 @@ class Zadania {
 		}
 		}
 	}
+	static void zadaniaZSzablonow() {
+		/*szablony nie mogą być definiowane lokalnie, więc piszemy u ,,u góry'' tego 
+		modułu*/
+		TTriple<int> trzyInt(10, 11, 12); //to jest ,,konkretyzacja'' naszego szablonu
+		cout << "Tu powinno być 12: " << trzyInt.getZ() << endl;
+	}
 };
 /*
   słowo virtual pozwala w C++ na tworzenie tak zwanych klas
@@ -261,9 +283,10 @@ int main()
 	bool koniec1 = false;
 	do {
 		TMenu mnu1;
-		mnu1.addAll(4, "Test klasy List",
+		mnu1.addAll(5, "Test klasy List",
 			"Obliczenie sumy kontrolnej lancucha",
-			"Klasy abstrakcyjne", "Zadania z przeładowywania operatorów");
+			"Klasy abstrakcyjne", "Zadania z przeładowywania operatorów", 
+			"Zadania z szablonow");
 		switch (mnu1.wybierz()) {
 		case 1: {
 			Zadania::zadaniaZProgObiektowego();
@@ -299,6 +322,10 @@ int main()
 					break;
 				}
 			} while (!koniec2);
+			break;
+		}
+		case 5: {
+			Zadania::zadaniaZSzablonow();
 			break;
 		}
 		default:
