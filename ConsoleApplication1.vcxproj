@@ -158,6 +158,9 @@
     <ClInclude Include="ListaSformatowana.h" />
     <ClInclude Include="TMenu.h" />
   </ItemGroup>
+  <ItemGroup>
+    <Text Include="zaliczenie.txt" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
